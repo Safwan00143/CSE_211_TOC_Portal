@@ -1,0 +1,36 @@
+import type { Check } from "./types"
+import { kitChecks } from "./kit-demo"
+import { dfaNoteChecks } from "./notes-dfa"
+import { nfaNoteChecks } from "./notes-nfa"
+import { regularNoteChecks } from "./notes-regular"
+import { cfgNoteChecks } from "./notes-cfg"
+import { pdaNoteChecks } from "./notes-pda"
+import { cnfNoteChecks } from "./notes-cnf"
+import { pdaHmuNoteChecks } from "./notes-pda-hmu"
+import { tmNoteChecks } from "./notes-tm"
+import { tm2NoteChecks } from "./notes-tm2"
+import { b22Checks } from "./b22"
+import { b21Checks, b21Facts } from "./b21"
+import { b20Checks, b20Facts } from "./b20"
+import { b18Checks, b18Facts } from "./b18"
+import { b17Checks, b17Facts } from "./b17"
+import { b16Checks, b16Facts } from "./b16"
+import { b15Checks, b15Facts } from "./b15"
+import { b14Checks, b14Facts } from "./b14"
+import { b13Checks, b13Facts } from "./b13"
+import { b12Checks, b12Facts } from "./b12"
+import { b11Checks } from "./b11"
+import { b10Checks } from "./b10"
+import { b09Checks } from "./b09"
+import { b08Checks, b08Facts } from "./b08"
+import { b07Checks, b07Facts } from "./b07"
+import { b06Checks } from "./b06"
+import { b05Checks } from "./b05"
+import { bookChecks, bookFacts } from "./book"
+import type { Fact } from "./types"
+
+/** Every verified automaton, grammar and regex on the site. */
+export const checks: Check[] = [...kitChecks, ...dfaNoteChecks, ...nfaNoteChecks, ...regularNoteChecks, ...cfgNoteChecks, ...pdaNoteChecks, ...cnfNoteChecks, ...pdaHmuNoteChecks, ...tmNoteChecks, ...tm2NoteChecks, ...b22Checks, ...b21Checks, ...b20Checks, ...b18Checks, ...b17Checks, ...b16Checks, ...b15Checks, ...b14Checks, ...b13Checks, ...b12Checks, ...b11Checks, ...b10Checks, ...b09Checks, ...b08Checks, ...b07Checks, ...b06Checks, ...b05Checks, ...bookChecks]
+
+/** Other claims in solutions, each recomputed by scripts/verify.ts. */
+export const facts: Fact[] = [...b21Facts, ...b20Facts, ...b18Facts, ...b17Facts, ...b16Facts, ...b15Facts, ...b14Facts, ...b13Facts, ...b12Facts, ...b08Facts, ...b07Facts, ...bookFacts]

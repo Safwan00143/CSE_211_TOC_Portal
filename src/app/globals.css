@@ -1,0 +1,260 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-outfit);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-subtle: var(--subtle);
+  --color-figure-2: var(--figure-2);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/*
+  One accent (deep sage) on warm paper. Everything else is ink at
+  different strengths, so the page stays quiet and the accent means "act here".
+*/
+:root {
+  --background: #fcf5e8;
+  --foreground: #1d2220;
+  --card: #fffbf3;
+  --card-foreground: #1d2220;
+  --popover: #fffbf3;
+  --popover-foreground: #1d2220;
+  --primary: #2f6b5f;
+  --primary-foreground: #fcf5e8;
+  --secondary: #f3eadb;
+  --secondary-foreground: #1d2220;
+  --muted: #f3eadb;
+  --muted-foreground: #65706b;
+  --accent: #e5eeea;
+  --accent-foreground: #24564c;
+  --subtle: #f6eee0;
+  --destructive: #b4483c;
+  --border: #e6dac6;
+  --input: #ddd0ba;
+  --ring: #2f6b5f;
+  --figure-2: #b5773a;
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: #121514;
+  --foreground: #e3e7e5;
+  --card: #171b1a;
+  --card-foreground: #e3e7e5;
+  --popover: #171b1a;
+  --popover-foreground: #e3e7e5;
+  --primary: #86c2b1;
+  --primary-foreground: #102420;
+  --secondary: #1c2120;
+  --secondary-foreground: #e3e7e5;
+  --muted: #1c2120;
+  --muted-foreground: #939c97;
+  --accent: #1b2925;
+  --accent-foreground: #a6d6c8;
+  --subtle: #161a19;
+  --destructive: #e07a6c;
+  --border: #252b29;
+  --input: #2d3432;
+  --ring: #86c2b1;
+  --figure-2: #dba46a;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-tight;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 22%, transparent);
+  }
+}
+
+/* ───────────── Long-form text: notes, questions, solutions ───────────── */
+
+.prose-study {
+  @apply text-[17px] leading-[1.85] text-foreground/90;
+}
+.prose-study > * + * {
+  margin-top: 1.25rem;
+}
+/* A paragraph that opens with a bold label ("Case 1", "(a)", "Step 2") starts a new step: give it room. */
+.prose-study > p:has(> strong:first-child) {
+  margin-top: 2rem;
+}
+/* Top-level "# Part …" lines divide a long lesson into parts. */
+.prose-study h1 {
+  @apply border-t border-border pt-8 font-heading text-[12px] font-medium uppercase tracking-[0.16em] text-primary;
+  margin-top: 4rem;
+}
+.prose-study h1:first-child {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+.prose-study h1 + h2 {
+  margin-top: 1rem;
+}
+.prose-study h2 {
+  @apply font-heading text-[1.4rem] font-medium text-foreground;
+  margin-top: 3rem;
+  scroll-margin-top: 6rem;
+}
+.prose-study h2:first-child {
+  margin-top: 0;
+}
+.prose-study h3 {
+  @apply font-heading text-lg font-medium text-foreground;
+  margin-top: 2rem;
+}
+.prose-study strong {
+  @apply font-semibold text-foreground;
+}
+.prose-study em {
+  @apply text-foreground/80;
+}
+.prose-study a {
+  @apply text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary;
+}
+.prose-study ul,
+.prose-study ol {
+  padding-left: 1.25rem;
+}
+.prose-study ul {
+  list-style: disc;
+}
+.prose-study ol {
+  list-style: decimal;
+}
+.prose-study li + li {
+  margin-top: 0.7rem;
+}
+.prose-study li > p + p,
+.prose-study li > .katex-display {
+  margin-top: 0.6rem;
+}
+.prose-study li::marker {
+  @apply text-muted-foreground;
+}
+.prose-study blockquote {
+  @apply border-l-2 border-primary/60 pl-4 text-foreground;
+}
+.prose-study code {
+  @apply rounded bg-muted px-1.5 py-0.5 font-mono text-[0.85em];
+}
+.prose-study hr {
+  @apply border-border;
+  margin: 2rem 0;
+}
+
+/* Tables: rules only, no boxes. Wide ones scroll inside their own frame. */
+.prose-study .table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose-study table {
+  @apply w-full text-[15.5px];
+  border-collapse: collapse;
+}
+.prose-study th {
+  @apply border-b border-foreground/15 py-2 pr-4 text-left font-medium text-muted-foreground;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+.prose-study td {
+  @apply border-b border-border py-3 pr-5 align-top;
+}
+.prose-study tr:last-child td {
+  border-bottom: 0;
+}
+
+.prose-study .table-wrap,
+.prose-study .katex-display {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--foreground) 18%, transparent) transparent;
+}
+
+/* Math */
+.prose-study .katex {
+  font-size: 1.06em;
+}
+.prose-study .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+  margin: 1.75rem 0;
+}
+.prose-study .katex-display > .katex {
+  font-size: 1.08em;
+}
+
+/* Prompts read slightly larger than solutions: they are what you study first. */
+.prose-prompt {
+  @apply text-[17.5px] leading-[1.85] text-foreground;
+}
+
+/* Indeterminate top progress bar used while a page loads. */
+@keyframes loading-bar {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+.loading-bar {
+  animation: loading-bar 1.1s ease-in-out infinite;
+}
+
+/* Sliders in interactive figures */
+.fig-range {
+  accent-color: var(--primary);
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
