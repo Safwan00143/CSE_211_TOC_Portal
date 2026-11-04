@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, type ReactNode } from "react"
-import { cn } from "@/lib/utils"
+import { SegmentedControl } from "glisse"
 
 type Tab = { id: string; label: string; count: number; content: ReactNode }
 
@@ -26,28 +26,26 @@ export function PracticeTabs({ tabs }: { tabs: Tab[] }) {
 
   return (
     <div>
-      <div role="tablist" aria-label="Question sets" className="mb-8 inline-flex rounded-full border border-border p-1">
-        {tabs.map((t) => (
-          <button
-            key={t.id}
-            role="tab"
-            type="button"
-            aria-selected={active === t.id}
-            onClick={() => pick(t.id)}
-            className={cn(
-              "rounded-full px-4 py-1.5 text-sm transition-colors",
-              active === t.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {t.label}
-            <span className="ml-2 tabular-nums opacity-70">{t.count}</span>
-          </button>
-        ))}
-      </div>
+      {/* Liquid Glass segmented control: the thumb springs between the two sets. */}
+      <SegmentedControl
+        aria-label="Question sets"
+        className="practice-sets mb-8"
+        value={active}
+        onValueChange={pick}
+        items={tabs.map((t) => ({
+          value: t.id,
+          label: (
+            <>
+              {t.label}
+              <span className="ml-2 tabular-nums opacity-60">{t.count}</span>
+            </>
+          ),
+        }))}
+      />
       {tabs.map((t) => (
-        <div key={t.id} role="tabpanel" hidden={active !== t.id}>
+        <section key={t.id} aria-label={t.label} hidden={active !== t.id}>
           {t.content}
-        </div>
+        </section>
       ))}
     </div>
   )

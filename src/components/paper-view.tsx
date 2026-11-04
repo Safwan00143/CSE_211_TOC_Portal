@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
+import { Button } from "glisse"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { loadSolution } from "@/components/practice-list"
 import { cn } from "@/lib/utils"
@@ -47,14 +48,9 @@ export function PaperView({ sections }: { sections: PaperViewSection[] }) {
             </a>
           ))}
         </nav>
-        <button
-          type="button"
-          onClick={() => setOpen(allOpen ? new Set() : new Set(keys))}
-          className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-sm transition-colors hover:bg-muted"
-        >
-          {allOpen ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+        <Button type="button" onClick={() => setOpen(allOpen ? new Set() : new Set(keys))} icon={allOpen ? <EyeOff className="size-4" /> : <Eye className="size-4" />}>
           {allOpen ? "Hide all solutions" : "Show all solutions"}
-        </button>
+        </Button>
       </div>
 
       {sections.map((s) => (

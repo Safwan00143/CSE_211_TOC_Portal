@@ -1,5 +1,6 @@
 "use client"
 
+import { SegmentedControl } from "glisse"
 import { useState } from "react"
 import { Check, Eye, EyeOff } from "lucide-react"
 import { BlurFade } from "@/components/ui/blur-fade"
@@ -56,25 +57,24 @@ export function PracticeList({ items, filterLabel }: { items: PracticeItem[]; fi
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
-        <div className="flex items-center gap-1" role="tablist" aria-label={filterLabel}>
-          {filters.map((f) => (
-            <button
-              key={f}
-              role="tab"
-              aria-selected={filter === f}
-              onClick={() => setFilter(f)}
-              className={cn(
-                "rounded-full px-3 py-1 text-[13px] transition-colors",
-                filter === f ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {f}
-              <span className="ml-1.5 tabular-nums opacity-60">
-                {f === "All" ? items.length : items.filter((i) => i.group === f).length}
-              </span>
-            </button>
-          ))}
-        </div>
+        {filters.length > 0 ? (
+          <SegmentedControl
+            aria-label={filterLabel}
+            value={filter}
+            onValueChange={setFilter}
+            items={filters.map((f) => ({
+              value: f,
+              label: (
+                <>
+                  {f}
+                  <span className="ml-1.5 tabular-nums opacity-60">{f === "All" ? items.length : items.filter((i) => i.group === f).length}</span>
+                </>
+              ),
+            }))}
+          />
+        ) : (
+          <span />
+        )}
         <Progress done={done} total={items.length} />
       </div>
 

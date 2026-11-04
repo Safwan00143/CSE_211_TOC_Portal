@@ -85,6 +85,27 @@
   --figure-2: #dba46a;
 }
 
+/*
+  Glisse (Liquid Glass controls) on the site's palette: the accent is our sage
+  rather than iOS blue, and the glass is tinted with the paper. Glisse's own
+  defaults sit in :where() rules, so these plain selectors win.
+*/
+:root,
+.dark {
+  --lg-fill: var(--primary);
+  --lg-foreground: var(--foreground);
+  --lg-muted: var(--muted-foreground);
+  --lg-destructive: var(--destructive);
+  --lg-ring: var(--ring);
+  --lg-segment-label: var(--foreground);
+  --lg-glass: color-mix(in srgb, var(--card) 58%, transparent);
+  --lg-segment-thumb: var(--card);
+}
+.dark {
+  --lg-glass: color-mix(in srgb, var(--secondary) 62%, transparent);
+  --lg-segment-thumb: #3d4744;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -256,5 +277,21 @@
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* The question-set switch has longer labels than Glisse's default 84px segments. */
+.lg-segmented.practice-sets {
+  --lg-tab-width: 164px;
+  --lg-tab-height: 36px;
+}
+.lg-segmented.practice-sets .lg-tab {
+  white-space: nowrap;
+}
+
+/* Header tabs: narrower on phones so the wordmark, three tabs and the theme button fit in 375px. */
+@media (max-width: 639px) {
+  .lg-tab-bar.site-tabs {
+    --lg-tab-width: 70px;
   }
 }
