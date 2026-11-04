@@ -28,7 +28,7 @@ export default async function LearnTopic({ params }: { params: Promise<{ slug: s
   const count = questionsFor(topic.slug).length
 
   return (
-    <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_12rem] xl:gap-12 xl:transition-[grid-template-columns,column-gap] xl:duration-300 xl:group-data-[right=closed]/shell:grid-cols-[minmax(0,1fr)_0rem] xl:group-data-[right=closed]/shell:gap-0">
+    <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_12rem] xl:gap-12 xl:transition-[grid-template-columns,column-gap] xl:duration-300 xl:group-data-[right=closed]/shell:grid-cols-[minmax(0,1fr)_2.5rem] xl:group-data-[right=closed]/shell:gap-4">
       <article className="min-w-0 max-w-[44rem] group-data-[left=closed]/shell:max-w-none xl:group-data-[right=closed]/shell:max-w-none">
         <header className="mb-12 border-b border-border pb-10">
           <p className="text-[13px] text-muted-foreground">
@@ -94,7 +94,7 @@ export default async function LearnTopic({ params }: { params: Promise<{ slug: s
       </article>
 
       <aside className="hidden min-w-0 transition-opacity duration-200 xl:block xl:overflow-clip xl:group-data-[right=closed]/shell:invisible xl:group-data-[right=closed]/shell:opacity-0">
-        <div className="sticky top-24">
+        <div className="sticky top-[7.5rem]">
           <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">On this page</p>
           <ul className="space-y-2 border-l border-border">
             {sections.map((s) => (

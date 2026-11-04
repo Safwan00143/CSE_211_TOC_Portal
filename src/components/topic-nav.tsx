@@ -50,7 +50,7 @@ export function TopicNav({ base }: { base: "/learn" | "/practice" }) {
         </summary>
         <div className="pb-4">{list}</div>
       </details>
-      <nav className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 lg:block" aria-label="Topics">
+      <nav className="sticky top-[7.5rem] hidden max-h-[calc(100vh-8.5rem)] overflow-y-auto pb-8 lg:block" aria-label="Topics">
         {list}
       </nav>
     </>

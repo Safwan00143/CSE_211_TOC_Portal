@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react"
 import { useRoute } from "@/lib/use-route"
 import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { Button } from "glisse"
 
 /*
   Which side panels are open. Remembered per browser; every read and write is
@@ -58,14 +58,15 @@ export function SidebarShell({ left, children }: { left: React.ReactNode; childr
       data-right={panels.right ? "open" : "closed"}
       className="group/shell mx-auto max-w-6xl px-4 pt-6 transition-[max-width,padding] duration-300 data-[left=closed]:max-w-[92rem] sm:px-6 lg:pt-8 lg:data-[left=closed]:px-16 xl:data-[left=closed]:px-20"
     >
-      <div className="mb-4 hidden items-center justify-between lg:flex">
-        <PanelButton onClick={() => toggle("left")} pressed={!panels.left} label={panels.left ? "Hide topics" : "Show topics"}>
-          <L className="size-4" />
-        </PanelButton>
+      {/*
+        The panel toggles float just under the header while the page scrolls, so
+        they never need a trip back to the top. The row lets clicks through; only
+        the buttons catch them. A closed panel's button shrinks to its icon.
+      */}
+      <div className="pointer-events-none sticky top-[4.5rem] z-30 mb-4 hidden h-10 items-center justify-between lg:flex">
+        <PanelButton onClick={() => toggle("left")} open={panels.left} label={panels.left ? "Hide topics" : "Show topics"} icon={<L className="size-4" />} className={panels.left ? undefined : "lg:-translate-x-[52px] xl:-translate-x-[60px]"} />
         {hasRight && (
-          <PanelButton onClick={() => toggle("right")} pressed={!panels.right} label={panels.right ? "Hide outline" : "Show outline"} className="hidden xl:inline-flex">
-            <R className="size-4" />
-          </PanelButton>
+          <PanelButton onClick={() => toggle("right")} open={panels.right} label={panels.right ? "Hide outline" : "Show outline"} icon={<R className="size-4" />} className="hidden xl:inline-flex" />
         )}
       </div>
       <div className="lg:grid lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-14 lg:transition-[grid-template-columns,column-gap] lg:duration-300 lg:group-data-[left=closed]/shell:grid-cols-[0rem_minmax(0,1fr)] lg:group-data-[left=closed]/shell:gap-0">
@@ -78,17 +79,10 @@ export function SidebarShell({ left, children }: { left: React.ReactNode; childr
   )
 }
 
-function PanelButton({ onClick, pressed, label, className, children }: { onClick: () => void; pressed: boolean; label: string; className?: string; children: React.ReactNode }) {
+function PanelButton({ onClick, open, label, icon, className }: { onClick: () => void; open: boolean; label: string; icon: React.ReactNode; className?: string }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={pressed}
-      title={label}
-      className={cn("inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground", className)}
-    >
-      {children}
-      {label}
-    </button>
+    <Button type="button" onClick={onClick} aria-pressed={!open} aria-label={label} title={label} icon={icon} className={["pointer-events-auto", className].filter(Boolean).join(" ")}>
+      {open ? label : undefined}
+    </Button>
   )
 }
