@@ -9,6 +9,7 @@ const nav = [
   { value: "/learn", href: "/learn", label: "Learn" },
   { value: "/practice", href: "/practice", label: "Practice" },
   { value: "/papers", href: "/papers", label: "Papers" },
+  { value: "/slides", href: "/slides", label: "Slides" },
 ]
 export function Wordmark() {
   return (

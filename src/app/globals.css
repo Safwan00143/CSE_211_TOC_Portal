@@ -289,9 +289,17 @@
   white-space: nowrap;
 }
 
-/* Header tabs: narrower on phones so the wordmark, three tabs and the theme button fit in 375px. */
+/* Header tabs: narrower on phones so the logo, four tabs and the theme button fit in 360px. */
 @media (max-width: 639px) {
   .lg-tab-bar.site-tabs {
     --lg-tab-width: 70px;
+  }
+}
+@media (max-width: 419px) {
+  .lg-tab-bar.site-tabs {
+    --lg-tab-width: 61px;
+  }
+  .lg-tab-bar.site-tabs .lg-tab {
+    font-size: 12.5px;
   }
 }

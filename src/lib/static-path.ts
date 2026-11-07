@@ -12,6 +12,11 @@ export function routeFile(path: string): string {
   return clean ? `${clean.split("/").join("--")}.html` : "home.html"
 }
 
+/** A file in public/ (e.g. /slides/x.html): kept as a relative path in the flat static build, where pages sit at the top level. */
+export function assetHref(path: string): string {
+  return STATIC_EXPORT ? path.replace(/^\/+/, "") : path
+}
+
 /** A route as a link target: unchanged normally, the flat file name in the static build. */
 export function toHref(path: string): string {
   if (!STATIC_EXPORT || !path.startsWith("/")) return path

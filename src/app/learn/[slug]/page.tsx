@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, Presentation } from "lucide-react"
+import { decksFor } from "@/content/slides"
+import { assetHref } from "@/lib/static-path"
 import { Markdown } from "@/components/markdown"
 import { notes, outline } from "@/content/notes"
 import { questionsFor } from "@/content/questions"
@@ -26,6 +28,7 @@ export default async function LearnTopic({ params }: { params: Promise<{ slug: s
   const note = notes[topic.slug] ?? ""
   const sections = outline(note)
   const count = questionsFor(topic.slug).length
+  const deckList = decksFor(topic.slug)
 
   return (
     <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_12rem] xl:gap-12 xl:transition-[grid-template-columns,column-gap] xl:duration-300 xl:group-data-[right=closed]/shell:grid-cols-[minmax(0,1fr)_2.5rem] xl:group-data-[right=closed]/shell:gap-4">
@@ -47,6 +50,26 @@ export default async function LearnTopic({ params }: { params: Promise<{ slug: s
               {count} past {count === 1 ? "question" : "questions"} on this topic
               <ArrowRight className="size-4" />
             </Link>
+          )}
+          {deckList.length > 0 && (
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {deckList.map((d) => (
+                <a
+                  key={d.file}
+                  href={assetHref(`/slides/${d.file}`)}
+                  className="group flex min-h-11 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-sm transition-colors hover:border-primary/40"
+                >
+                  <Presentation className="size-5 shrink-0 text-primary" aria-hidden />
+                  <span>
+                    <span className="block font-medium">Animated slides: {d.title}</span>
+                    <span className="block text-[12.5px] text-muted-foreground">
+                      {d.slides} slides · {d.source} · works on phones
+                    </span>
+                  </span>
+                  <ArrowRight className="ml-auto size-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5" />
+                </a>
+              ))}
+            </div>
           )}
         </header>
 

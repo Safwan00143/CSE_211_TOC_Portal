@@ -22,6 +22,13 @@ let pages = 0
 let assets = 0
 for (const file of walk(OUT)) {
   const r = rel(file)
+  if (r.startsWith("slides/")) {
+    // The animated slide decks are self-contained files: copy them as they are.
+    fs.mkdirSync(path.join(DEST, "slides"), { recursive: true })
+    fs.copyFileSync(file, path.join(DEST, r))
+    assets++
+    continue
+  }
   if (r.endsWith(".html")) {
     if (r === "404.html" || r.startsWith("_not-found")) continue
     const route = r.replace(/\.html$/, "").replace(/(^|\/)index$/, "")
