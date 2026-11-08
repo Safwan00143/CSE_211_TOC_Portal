@@ -102,4 +102,6 @@ export type Topic = {
   lectures: string
   /** One line on whose notation the topic uses. */
   notation: string
+  /** A pointer to a related topic, shown under the title (e.g. where newer questions of this kind are filed). */
+  seeAlso?: { slug: TopicSlug; text: string }
 }

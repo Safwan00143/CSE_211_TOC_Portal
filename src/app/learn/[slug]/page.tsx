@@ -42,6 +42,15 @@ export default async function LearnTopic({ params }: { params: Promise<{ slug: s
           <h1 className="mt-3 text-4xl font-medium leading-tight sm:text-[2.75rem]">{topic.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{topic.short}</p>
           <p className="mt-3 text-[13.5px] text-muted-foreground">{topic.notation}</p>
+          {topic.seeAlso && (
+            <p className="mt-4 text-[13.5px] text-muted-foreground">
+              {topic.seeAlso.text}:{" "}
+              <Link href={`/practice/${topic.seeAlso.slug}`} className="font-medium text-primary hover:underline hover:underline-offset-4">
+                open them
+              </Link>
+              .
+            </p>
+          )}
           {count > 0 && (
             <Link
               href={`/practice/${topic.slug}`}

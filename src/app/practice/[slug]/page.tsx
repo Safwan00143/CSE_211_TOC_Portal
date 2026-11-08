@@ -66,6 +66,15 @@ export default async function PracticeTopic({ params }: { params: Promise<{ slug
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Try each question before opening its solution. Newest session first.
           </p>
+          {topic.seeAlso && (
+            <p className="mt-4 text-[13.5px] text-muted-foreground">
+              {topic.seeAlso.text}:{" "}
+              <Link href={`/practice/${topic.seeAlso.slug}`} className="font-medium text-primary hover:underline hover:underline-offset-4">
+                open them
+              </Link>
+              .
+            </p>
+          )}
           <Link
             href={`/learn/${topic.slug}`}
             className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline hover:underline-offset-4"

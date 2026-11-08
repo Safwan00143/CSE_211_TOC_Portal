@@ -111,6 +111,7 @@ export const topics: Topic[] = [
     teacher: "Atif Sir",
     lectures: "Atif Sir · Lecture 4",
     notation: HMU,
+    seeAlso: { slug: "tm-techniques", text: "The TM design questions from 2017-18 onwards (AND, OR, XOR, NOT, equality, two’s complement) are under Programming techniques" },
   },
   {
     slug: "tm-techniques",

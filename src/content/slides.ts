@@ -43,6 +43,26 @@ export const decks: Deck[] = [
     topics: ["undecidability"],
     highlights: ["Edit the diagonal table and watch L_d escape every row", "A universal machine running a real TM", "Play Post's Correspondence Problem"],
   },
+  {
+    file: "intractability.html",
+    title: "Intractability and space",
+    teacher: "Atif Sir",
+    source: "Lectures 8 and 9",
+    slides: 31,
+    summary: "P and NP, polynomial-time reductions, NP-completeness, Cook's theorem, 3-SAT to Hamiltonian cycle, Clique, Partition, PSPACE and Savitch's theorem.",
+    topics: ["complexity"],
+    highlights: ["Toggle x₁, x₂, x₃ and watch the Hamiltonian cycle form or break", "Balance Subset Sum on a Partition scale", "Follow Savitch's recursion stack"],
+  },
+  {
+    file: "tm-questions.html",
+    title: "Turing machine questions, solved",
+    teacher: "Term finals",
+    source: "2006-07 to 2023-24",
+    slides: 62,
+    summary: "All 49 TM question parts from 17 papers. Each starts with the full question, highlights what it asks, builds the approach, then solves it: the bitwise machines of recent Q9s, arithmetic, deciders, definitions, and the simulations and true/false statements of Q10.",
+    topics: ["tm-basics", "tm-techniques", "tm-variants"],
+    highlights: ["Run AND, OR, XOR, NOT, equality and two's complement on your own input", "See the four table cells that separate AND, OR and XOR", "Watch one tape simulate two, and a DTM search an NTM's IDs"],
+  },
 ]
 
 export const decksFor = (slug: string) => decks.filter((d) => d.topics.includes(slug as TopicSlug))

@@ -21,13 +21,13 @@ export default function SlidesIndex() {
         <p className="text-[13px] font-medium text-primary">Animated slides</p>
         <h1 className="mt-3 text-4xl font-medium leading-tight">Watch the ideas move</h1>
         <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
-          Step-by-step animated explanations of Atif Sir&rsquo;s lectures, one caption per step. Many slides let you type
+          Step-by-step animated explanations of Atif Sir&rsquo;s lectures and of past term-final questions, one caption per step. Many slides let you type
           your own input, drag a slider or click a table, and every machine in them is checked by code. Each deck is a
           single file that also works offline.
         </p>
       </div>
 
-      <ul className="mt-10 grid gap-5 lg:grid-cols-3">
+      <ul className="mt-10 grid gap-5 md:grid-cols-2">
         {decks.map((d) => (
           <li key={d.file} className="flex">
             <div className="flex w-full flex-col rounded-xl border border-border bg-card p-6">
